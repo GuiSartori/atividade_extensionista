@@ -86,9 +86,9 @@
         // Adiciona campos de nome e senha ao formulário
         form.innerHTML += `
                 <label for="name">Nome:</label><br>
-                <input type="text" id="name" name="name" placeholder="Digite seu nome"><br><br>
-                <label for="password">Senha:</label><br>
-                <input type="password" id="password" name="password" placeholder="Digite sua senha"><br><br>
+                <input type="text" id="name" name="name" placeholder="Digite seu nome completo"><br><br>
+                <label for="turma">Turma:</label><br>
+                <input type="text" id="turma" name="turma" placeholder="Digite sua turma"><br><br>
             `;
 
         // Adiciona perguntas e alternativas ao formulário
@@ -120,6 +120,7 @@
 
       function saveResults() {
         const name = document.getElementById("name").value;
+        const turma = document.getElementById("turma").value;
         const answers = questions.map((q, index) => {
           return document.querySelector(`input[name="q${index + 1}"]:checked`)
             .value;
@@ -158,8 +159,8 @@
         const encodedUri = encodeURI(csvContent);
         const link = document.createElement("a");
         const filename = name
-          ? name.replace(/[^a-zA-Z0-9]/g, "_") + ".csv"
-          : "resultados.csv";
+            ? name.replace(/[^a-zA-Z0-9]/g, "_") + "_" + turma.replace(/[^a-zA-Z0-9]/g, "_") + ".csv"
+            : "resultados.csv";
         link.setAttribute("href", encodedUri);
         link.setAttribute("download", filename);
         document.body.appendChild(link); // Required for FF
